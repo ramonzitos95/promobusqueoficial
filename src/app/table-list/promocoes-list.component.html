@@ -1,0 +1,72 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <button class="btn btn-danger" [routerLink]="['/incluir-promocoes']" routerLinkActive="router-link-active"  >Incluir promoção</button>
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Promoções</h4>
+                      <p class="card-category">As promoções serão listadas abaixo</p>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      ID
+                                  </th>
+                                  <th>
+                                      Nome
+                                  </th>
+                                  <th>
+                                      Descrição
+                                  </th>
+                                  <th>
+                                      Data validade
+                                  </th>
+                                  <th>
+                                      Quantidade visitas
+                                  </th>
+                                  <th>
+                                    
+                                  </th>
+                                  <th>
+                                        
+                                  </th>
+                              </thead>
+                              <tbody *ngFor="let p of promocoes">
+                                  <tr>
+                                      <td>
+                                          {{p.Id}}
+                                      </td>
+                                      <td>
+                                          {{p.Nome}}
+                                      </td>
+                                      <td>
+                                          {{p.Descricao}}
+                                      </td>
+                                      <td>
+                                          {{p.DataValidade | date: 'dd/MM/yyyy'}}
+                                      </td>
+
+                                      <td>
+                                        {{p.QuantidadeVisitas}}
+                                      </td>
+
+                                      <td></td>
+                                      <td>
+                                            <button class="btn btn-danger" [routerLink]="['/incluir-promocoes', p.Id]" routerLinkActive="router-link-active">Alterar</button>
+                                      </td>
+                                      <td >
+                                            <button class="btn btn-danger" (click)="excluirPromocao(p.Id)">Excluir</button>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

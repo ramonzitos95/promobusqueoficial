@@ -1,0 +1,59 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">Incluir promocão</h4>
+                    <p class="card-category">Preencha os dados da promoção abaixo</p>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="form">
+                        <div class="row">
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Nome" formControlName="Nome" [(ngModel)]="promocao.Nome">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-3">  
+                              <mat-form-field>
+                                <input matInput [matDatepicker]="picker" placeholder="title" placeholder="Data de validade" formControlName="DataValidade" [(ngModel)]="promocao.DataValidade" autocomplete="off">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <!-- <button matSuffix [matDatepickerToggle]="picker"></button> -->
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <mat-checkbox
+                                  type="checkbox"
+                                  formControlName="Situacao">
+                                  Situação
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Descricao" type="text" formControlName="Descricao" [(ngModel)]="promocao.Descricao" >
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field>
+                                    <mat-select placeholder="Categoria" formControlName="Categoria" [(ngModel)]="categoriaSelecionada">
+                                    <mat-option>Selecione</mat-option>
+                                    <mat-option *ngFor="let cat of categorias" [value]="cat" (click)="onChangeCategoria(cat)" >{{cat.Nome}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="atualizarPromocao()" [disabled]="!form.valid">Gravar</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

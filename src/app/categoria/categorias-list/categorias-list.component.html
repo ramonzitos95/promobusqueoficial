@@ -1,0 +1,51 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <button class="btn btn-danger" [routerLink]="['/incluir-categoria']" routerLinkActive="router-link-active"  >Incluir categoria</button>
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title ">Categorias</h4>
+                      <p class="card-category">As categorias serão listadas abaixo</p>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead class=" text-primary">
+                                  <th>
+                                      ID
+                                  </th>
+                                  <th>
+                                      Nome
+                                  </th>
+                                  <th>
+                                    
+                                  </th>
+                                  <th>
+                                        
+                                  </th>
+                              </thead>
+                              <tbody *ngFor="let p of categorias">
+                                  <tr>
+                                      <td>
+                                          {{p.Id}}
+                                      </td>
+                                      <td>
+                                          {{p.Nome}}
+                                      </td>
+                                      <td>
+                                            <button class="btn btn-danger" [routerLink]="['/incluir-categoria', p.Id]" routerLinkActive="router-link-active">Alterar</button>
+                                      </td>
+                                      <td >
+                                            <button class="btn btn-danger" (click)="excluirCategoria(p.Id)">Excluir</button>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

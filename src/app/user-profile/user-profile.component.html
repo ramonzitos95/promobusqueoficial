@@ -1,0 +1,73 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-8">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Perfil Empresa</h4>
+                      <p class="card-category">Complete os dados da Empresa</p>
+                  </div>
+                  <div class="card-body">
+                      <form [formGroup]="form">
+                          <div class="row">
+                              <div class="col-md-5">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Razão Social" formControlName="RazaoSocial" [(ngModel)]="empresa.RazaoSocial">
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Cnpj" formControlName="Cnpj" [(ngModel)]="empresa.Cnpj" >
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Cep" type="text" formControlName="Cep" [(ngModel)]="empresa.Cep" (change)="getcep(empresa.Cep)">
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Site" type="text" formControlName="Site" [(ngModel)]="empresa.Site" >
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Cidade" type="text" formControlName="Cidade" [(ngModel)]="empresa.Cidade" >
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-8">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Endereço" type="text" formControlName="Endereco" [(ngModel)]="empresa.Endereco" >
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Estado" type="text"  formControlName="Estado" [(ngModel)]="empresa.Estado" >
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Telefone" type="text" formControlName="Telefone" [(ngModel)]="empresa.Telefone" >
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Celular" type="text" formControlName="Celular" [(ngModel)]="empresa.Celular" >
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="atualizarEmpresa()" [disabled]="!form.valid">Atualizar dados</button>
+                          <div class="clearfix"></div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

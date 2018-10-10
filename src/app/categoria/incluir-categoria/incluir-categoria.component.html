@@ -1,0 +1,34 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">Incluir categoria</h4>
+                    <p class="card-category">Preencha os dados da categoria abaixo</p>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="form">
+                        <div class="row">
+                            <div class="col-md-9">
+                              <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Nome" formControlName="Nome" [(ngModel)]="categoria.Nome">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                              <mat-checkbox
+                                type="checkbox"
+                                formControlName="Situacao" checked>
+                                Situação
+                              </mat-checkbox>
+                            </div>
+                        </div>
+                        <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="atualizarCategoria()" [disabled]="!form.valid">Gravar</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

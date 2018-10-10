@@ -1,0 +1,33 @@
+
+img-body{
+    background-image: './../assets/img/loginpromocao.jpg';
+}
+
+.box{
+    width:400px;
+    height:250px;
+    position:absolute;
+    top:40%;
+    left:40%;
+    margin-top:-50px;
+    margin-left:-50px;
+    background: #A5D6A7;
+}  
+
+.botao-login{
+    background: #4CAF50;
+    margin-left: 30px;
+}
+
+form {
+    padding-top: 30px;
+}
+
+label{
+    color: black;
+}
+
+.button-cadastro {
+    margin-right: 90px;
+    background: #4CAF50;
+}
