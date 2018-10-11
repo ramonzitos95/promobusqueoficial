@@ -93,7 +93,7 @@ export class UserProfileComponent implements OnInit {
     localStorage.setItem("idEmpresa", empresa.Id.toString());
   }
 
-  getcep(cep: string){
+  getcep(cep: String){
     this.cepService
       .consultarCep(cep)
       .subscribe(resposta => {

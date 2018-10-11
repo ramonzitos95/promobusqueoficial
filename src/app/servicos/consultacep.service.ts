@@ -15,7 +15,7 @@ export class ConsultacepService {
 
   }
 
-  consultarCep(cep: string) : Observable<CepModelo>{
+  consultarCep(cep: String) : Observable<CepModelo>{
     console.log(this.urlViaCep);
     return this.httpClient.get<CepModelo>(`${this.urlViaCep}${cep}/json`);
   }
