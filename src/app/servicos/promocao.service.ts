@@ -1,6 +1,6 @@
 import { PromocaoModelo } from './../modelos/PromocaoModelo';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { ResultadoOperacao } from '../modelos/ResultadoOperacao';
 import { Observable } from 'rxjs/Observable';
@@ -22,6 +22,7 @@ export class PromocaoService {
   atualizarPromocao (empresa: PromocaoModelo): Observable<ResultadoOperacao<PromocaoModelo>> {
     return this.httpClient.post<ResultadoOperacao<PromocaoModelo>>(this.urlAtualizar, empresa)
   }
+
 
   obterPorId(id: Number){
     return this.httpClient.get<PromocaoModelo>(`${this.urlObterPorId}${id}`);

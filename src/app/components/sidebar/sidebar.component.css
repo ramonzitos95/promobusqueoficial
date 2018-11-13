@@ -1,0 +1,11 @@
+.img-responsive{
+    width: 240px;
+    height: 180px;
+    position: fixed;
+    margin-left: 12px;
+    margin-top: 5px;
+}
+
+.nav{
+    margin-top: 200px;
+}

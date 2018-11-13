@@ -18,6 +18,9 @@ export class IncluirPromocaoComponent implements OnInit {
   form: FormGroup;
   categorias: Array<CategoriaModelo>;
   categoriaSelecionada: CategoriaModelo; 
+  imageSrc: String;
+  imagemSelecionada;
+  formData = new FormData();
 
   constructor(
     private builder: FormBuilder,
@@ -41,6 +44,25 @@ export class IncluirPromocaoComponent implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  //Ao mudar a imagem
+  readURL(event): void {
+    
+    if (event.target.files && event.target.files[0]) {
+
+      this.imagemSelecionada = event.target.files[0];
+      console.log(this.imagemSelecionada);
+      
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = () => {
+        this.imageSrc = reader.result.toString();
+      }
+
+    }
   }
 
   atualizarPromocao(){

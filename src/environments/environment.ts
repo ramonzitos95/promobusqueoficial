@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  urlBase: 'http://localhost:5000/',
+  urlBase: 'http://localhost:8000/',
   urlViaCep: 'viacep.com.br/ws/'
 };  

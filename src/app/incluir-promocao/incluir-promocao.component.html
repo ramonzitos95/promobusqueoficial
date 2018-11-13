@@ -48,7 +48,21 @@
                             </div>
                         </div>
 
-                        <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="atualizarPromocao()" [disabled]="!form.valid">Gravar</button>
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                            
+                            </div>
+                            <div class="col-md-6">
+                                <input type='file' (change)="readURL($event);"/>
+                                <img id="imagem" [src]="imageSrc || 'http://placehold.it/180'" alt="Promoção" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                        </div> -->
+
+                        <button mat-raised-button type="submit" class="btn btn-danger pull-right button-salvar" (click)="atualizarPromocao()" [disabled]="!form.valid">Gravar</button>
                         <div class="clearfix"></div>
                     </form>
                 </div>
