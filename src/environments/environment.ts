@@ -5,6 +5,14 @@
 
 export const environment = {
   production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyBLVmpqDtunlFf-BsQp9WYE6tpbWs9sMYo",
+    authDomain: "promobusque.firebaseapp.com",
+    databaseURL: "https://promobusque.firebaseio.com",
+    projectId: "promobusque",
+    storageBucket: "promobusque.appspot.com",
+    messagingSenderId: "1041150547735"
+  },
   urlBase: 'http://localhost:8000/',
   urlViaCep: 'viacep.com.br/ws/'
 };  
