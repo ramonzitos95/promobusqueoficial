@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
   fazerLogin(){
     if(this.usuario != null){
+      console.log(this.usuario);
       this.authService.login(this.usuario.email, this.usuario.senha);
     }
   }

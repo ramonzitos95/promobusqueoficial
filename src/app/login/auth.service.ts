@@ -22,13 +22,15 @@ export class AuthService {
           console.log(password);
           return new Promise((resolve, reject) => {
           this.afAuth.auth.signInWithEmailAndPassword(mail, password).then((user) => {
-          localStorage['token'] = user.user;
+          localStorage['token'] = user.user.refreshToken;
           console.log(user);
           this.router.navigate(['']);
         }).catch((error) => { 
+          console.log(error);
           this.router.navigate(['/login']);
           });
         }).catch((error) => {
+          console.log(error);
           this.router.navigate(['/login']);
         });
       }
