@@ -1,4 +1,4 @@
-import { AuthGuard } from './guard/auth.guard';
+
 import { UsuarioComponent } from './login/usuario/usuario.component';
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
@@ -7,11 +7,13 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',

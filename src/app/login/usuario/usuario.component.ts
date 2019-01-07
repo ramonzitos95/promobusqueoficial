@@ -21,24 +21,24 @@ export class UsuarioComponent implements OnInit {
   ngOnInit() {
   }
 
-  cadastrar(){
-    if(this.usuario != null){
-      if(this.usuario.Nome === "" || this.usuario.Nome == null)
-        this.mensagemValidacao = "Usuário está vazio!";
-      else if(this.usuario.Senha === "" || this.usuario.Senha == null)
-        this.mensagemValidacao = "Senha está vazia!";
-      else{
-        this.usuarioService.cadastrar(this.usuario)
-        .subscribe(resultadoOperacao => {
-          if(resultadoOperacao.Sucesso == true){
-            Swal('Sucesso', resultadoOperacao.Mensagens[0], 'success');
-            this.router.navigate(['login']);
-          } else {
-            Swal('Falha', resultadoOperacao.Mensagens[0], 'warning');
-          }
-        });
-      }
-    }
-  }
+  // cadastrar(){
+  //   if(this.usuario != null){
+  //     if(this.usuario.Nome === "" || this.usuario.Nome == null)
+  //       this.mensagemValidacao = "Usuário está vazio!";
+  //     else if(this.usuario.Senha === "" || this.usuario.Senha == null)
+  //       this.mensagemValidacao = "Senha está vazia!";
+  //     else{
+  //       this.usuarioService.cadastrar(this.usuario)
+  //       .subscribe(resultadoOperacao => {
+  //         if(resultadoOperacao.Sucesso == true){
+  //           Swal('Sucesso', resultadoOperacao.Mensagens[0], 'success');
+  //           this.router.navigate(['login']);
+  //         } else {
+  //           Swal('Falha', resultadoOperacao.Mensagens[0], 'warning');
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
 
 }
