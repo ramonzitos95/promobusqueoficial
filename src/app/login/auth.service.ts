@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class AuthService {
 
-  usuarioEstaLogado: boolean = false;
   user: Observable<firebase.User>;
 
   constructor(
@@ -18,71 +18,37 @@ export class AuthService {
   }
 
   public login(mail: string, password: string) {
-          console.log(mail);
-          console.log(password);
           return new Promise((resolve, reject) => {
           this.afAuth.auth.signInWithEmailAndPassword(mail, password).then((user) => {
-          localStorage['token'] = user.user.refreshToken;
-          console.log(user);
-          this.router.navigate(['']);
-        }).catch((error) => { 
-          console.log(error);
-          this.router.navigate(['/login']);
+            localStorage['token'] = user.user.uid;
+            Swal('Sucesso', 'Usuário logado com sucesso!', 'success');
+            console.log(user);
+            this.router.navigate(['']);
+          }).catch((error) => { 
+            this.validaRetornoFirebase(error);
           });
         }).catch((error) => {
-          console.log(error);
-          this.router.navigate(['/login']);
+          this.validaRetornoFirebase(error)
         });
       }
 
   public logout() {
-    return this.afAuth.auth.signOut();
+    this.afAuth.auth.signOut();
+    return this.router.navigate(['/login']);
   }
 
-  // fazerLogin(usuario: Usuario){
-  //   var usuarioModelo = new UsuarioModelo;
-  //   usuarioModelo.Nome = usuario.email;
-  //   usuarioModelo.Senha = usuario.senha;
+  validaRetornoFirebase(error: any){
+    if(error != null)
+    {
+      if(error.code == "auth/invalid-email")
+        Swal('Erro', "O e-mail informado está inválido", 'error');
+      else if(error.code == "auth/wrong-password")
+        Swal('Erro', "Senha inválida ou o usuário não possui uma senha", 'error');
+      else      
+        Swal('Erro', error.message, 'error');
+      
+      this.router.navigate(['/login']);
 
-  //   this.usuarioService
-  //   .fazerLogin(usuarioModelo)
-  //   .subscribe(resultado => {
-  //     if(resultado.Sucesso){
-  //       if(resultado.Sucesso == true){
-
-  //         Swal('Sucesso', resultado.Mensagens[0], 'success');
-
-  //         this.router.navigate(['dashboard']);
-
-  //         this.salvaInformacoesNoLocal(resultado.Modelo);
-
-  //         this.usuarioEstaLogado = true;
-          
-  //       } else {
-
-  //         Swal('Falha', resultado.Mensagens[0], 'warning');
-
-  //         this.router.navigate(['']);
-
-  //         this.usuarioEstaLogado = false;
-  //       }
-  //     }
-  //   });
-  // }
-
-  // salvaInformacoesNoLocal(modelo: UsuarioModelo){
-  //   localStorage.setItem("usuario", modelo.Nome);
-  //   localStorage.setItem("idUsuario", modelo.Id.toString());
-  // }
-
-  // logout(){
-  //   localStorage.removeItem("usuario");
-  //   localStorage.removeItem("idUsuario");
-  //   localStorage.clear();
-  //   this.router.navigate(['']);
-  // }
-
-  // usuarioLogado() : boolean {
-  //   return this.usuarioEstaLogado;
-  // }
+    }
+  }
 }

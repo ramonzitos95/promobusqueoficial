@@ -10,11 +10,11 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: LoginComponent,
-    canActivate: [AuthGuard]
-  },
+  // {
+  //   path: '',
+  //   component: LoginComponent,
+  //   canActivate: [AuthGuard]
+  // },
   {
     path: 'login',
     component: LoginComponent
