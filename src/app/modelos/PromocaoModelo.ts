@@ -1,5 +1,5 @@
 export class PromocaoModelo {
-    Id :Number
+    $key : string;
     Nome: String 
     Descricao: String 
     Ativa: Number;

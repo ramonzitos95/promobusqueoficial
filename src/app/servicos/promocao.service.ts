@@ -5,42 +5,55 @@ import { environment } from 'environments/environment';
 import { ResultadoOperacao } from '../modelos/ResultadoOperacao';
 import { Observable } from 'rxjs/Observable';
 
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database'
+import { getLocaleDateTimeFormat } from '@angular/common';
+
 @Injectable()
 export class PromocaoService {
 
-  
-  promocaoModelo: PromocaoModelo;
-  urlAtualizar: string = `${environment.urlBase}Api/Promocao/Gravar`;
-  urlObterPorId: string = `${environment.urlBase}Api/Promocao/ObterPorId/`;
-  urlRemover: string = `${environment.urlBase}Api/Promocao/Remover/`;
-  urlObterTodasDaEmpresa: string = `${environment.urlBase}Api/Promocao/ObterTodasPromocoesPorEmpresa/`;
-
-  constructor(private httpClient: HttpClient) { 
+  listaPromocao: AngularFireList<any>;
+  constructor(private firebase :AngularFireDatabase ) {
 
   }
 
-  atualizarPromocao (empresa: PromocaoModelo): Observable<ResultadoOperacao<PromocaoModelo>> {
-    return this.httpClient.post<ResultadoOperacao<PromocaoModelo>>(this.urlAtualizar, empresa)
+  getData(){
+    this.listaPromocao = this.firebase.list('employees');
+    return this.listaPromocao;
   }
 
-
-  obterPorId(id: Number){
-    return this.httpClient.get<PromocaoModelo>(`${this.urlObterPorId}${id}`);
+  insertEmployee(promocao : PromocaoModelo)
+  {
+    this.listaPromocao.push({
+      nome: promocao.Nome,
+      descricao: promocao.Descricao,
+      idCategoria: promocao.IdCategoria,
+      idEmpresa: promocao.IdEmpresa,
+      dataValidade: promocao.DataValidade,
+      dataCadastro: Date.now,
+      quantidadeVisitas: promocao.QuantidadeVisitas,
+      foto: promocao.Foto,
+      ativa: promocao.Ativa,
+      dataAlteracao: null
+    });
   }
 
-  remover(id: number){
-    return this.httpClient.get<PromocaoModelo>(`${this.urlRemover}${id}`);
+  updateEmployee(promocao : PromocaoModelo){
+    this.listaPromocao.update(promocao.$key,
+      {
+        nome: promocao.Nome,
+        descricao: promocao.Descricao,
+        idCategoria: promocao.IdCategoria,
+        idEmpresa: promocao.IdEmpresa,
+        dataValidade: promocao.DataValidade,
+        quantidadeVisitas: promocao.QuantidadeVisitas,
+        foto: promocao.Foto,
+        ativa: promocao.Ativa,
+        dataAlteracao: Date.now
+      });
   }
 
-  obterTodasPromocoesDaEmpresa(){
-    var idEmpresa = Number.parseInt(this.obterIdEmpresa());
-    if(idEmpresa !== undefined){
-      return this.httpClient.get<Array<PromocaoModelo>>(`${this.urlObterTodasDaEmpresa}${idEmpresa}`);  
-    }
-  }
-
-  obterIdEmpresa(){
-    return localStorage.getItem("idEmpresa");;
+  deleteEmployee($key : string){
+    this.listaPromocao.remove($key);
   }
 
 }
