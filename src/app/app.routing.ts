@@ -16,14 +16,14 @@ const routes: Routes = [
   //   canActivate: [AuthGuard]
   // },
   {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'cadastro-usuario',

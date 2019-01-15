@@ -1,17 +1,15 @@
 export class EmpresaModelo {
-    Id: Number;
-    RazaoSocial: String;
-    Cnpj: String;
-    Cep : String;
-    Site : String;
-    Telefone : String;
-    Celular : String;
-    Endereco : String;
-    Estado : String;
-    Cidade : String; 
-    Logo : String;
+    $Key: string;
+    RazaoSocial: string;
+    Cnpj: string;
+    Cep : string;
+    Site : string;
+    Telefone : string;
+    Celular : string;
+    Endereco : string;
+    Estado : string;
+    Cidade : string; 
     DataCadastro: Date; 
     DataAlteracao: Date; 
-    IdUsuario: Number;
     QuantidadeFavoritos: Number;
 }

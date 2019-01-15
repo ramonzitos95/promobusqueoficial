@@ -17,37 +17,37 @@ export class PromocoesListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.carregaPromocoes();
+    //this.carregaPromocoes();
   }
 
-  carregaPromocoes(){
-    this.promocaoService
-      .obterTodasPromocoesDaEmpresa()
-      .subscribe(res => {
-        this.promocoes = res
-        console.log(res);
-      });
-  }
+  // carregaPromocoes(){
+  //   this.promocaoService
+  //     .obterTodasPromocoesDaEmpresa()
+  //     .subscribe(res => {
+  //       this.promocoes = res
+  //       console.log(res);
+  //     });
+  // }
 
-  excluirPromocao(id: number) {
+  // excluirPromocao(id: number) {
 
-    if(id !== undefined && id > 0){
-      this.promocaoService
-        .remover(id)
-        .subscribe(promocao => {
+  //   if(id !== undefined && id > 0){
+  //     this.promocaoService
+  //       .remover(id)
+  //       .subscribe(promocao => {
 
-          if(promocao !== null){
-            Swal('Exclusão', 'Promoção removida com sucesso', 'success');
-            this.carregaPromocoes();
-          }
-          else{
-            Swal('Exclusão', 'Houve um problema ao excluir a promoção', 'info');
-          }
+  //         if(promocao !== null){
+  //           Swal('Exclusão', 'Promoção removida com sucesso', 'success');
+  //           this.carregaPromocoes();
+  //         }
+  //         else{
+  //           Swal('Exclusão', 'Houve um problema ao excluir a promoção', 'info');
+  //         }
 
-        })
-    } else {
-      console.log('Id indefinido');
-    }
-  }
+  //       })
+  //   } else {
+  //     console.log('Id indefinido');
+  //   }
+  // }
 
 }

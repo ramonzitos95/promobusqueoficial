@@ -17,11 +17,11 @@ export class DashboardComponent implements OnInit {
   ) { 
     var idEmpresa = Number.parseInt(localStorage.getItem("idEmpresa"));
 
-    this.empresaService
-      .obterQuantidadeGerencialEmpresa(idEmpresa)
-      .subscribe(res => {
-        this.quantidadeGerencial = res
-      });
+    // this.empresaService
+    //   .obterQuantidadeGerencialEmpresa(idEmpresa)
+    //   .subscribe(res => {
+    //     this.quantidadeGerencial = res
+    //   });
   }
 
   startAnimationForLineChart(chart){

@@ -8,62 +8,71 @@
                       <p class="card-category">Complete os dados da Empresa</p>
                   </div>
                   <div class="card-body">
-                      <form [formGroup]="form">
+                      <form #empresaForm="ngForm" (ngSubmit)="onSubmit(empresaForm)">
+                          <input type="hidden" name="$Key" #$Key="ngModel" [(ngModel)]="empresaServico.empresaSelecionada.$Key">
+                          <input type="hidden" name="QuantidadeFavoritos" #QuantidadeFavoritos="ngModel" [(ngModel)]="empresaServico.empresaSelecionada.QuantidadeFavoritos">
                           <div class="row">
                               <div class="col-md-5">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Razão Social" formControlName="RazaoSocial" [(ngModel)]="empresa.RazaoSocial">
+                                    <input matInput placeholder="Razão Social" #RazaoSocial="ngModel" [(ngModel)]="empresaServico.empresaSelecionada.RazaoSocial"  name="RazaoSocial" />
                                   </mat-form-field>
                               </div>
                               <div class="col-md-3">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Cnpj" formControlName="Cnpj" [(ngModel)]="empresa.Cnpj" >
+                                    <input matInput placeholder="Cnpj" #Cnpj="ngModel" [(ngModel)]="empresaServico.empresaSelecionada.Cnpj" name="Cnpj" />
                                   </mat-form-field>
                               </div>
                               <div class="col-md-4">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Cep" type="text" formControlName="Cep" [(ngModel)]="empresa.Cep" (change)="getcep(empresa.Cep)">
+                                    <input matInput placeholder="Cep" type="text" #Cep="ngModel" [(ngModel)]="empresaServico.empresaSelecionada.Cep" name="Cep"/>
                                   </mat-form-field>
                               </div>
                           </div>
                           <div class="row">
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Site" type="text" formControlName="Site" [(ngModel)]="empresa.Site" >
+                                  <input matInput placeholder="Site" type="text" #Site="ngModel"  [(ngModel)]="empresaServico.empresaSelecionada.Site" name="Site"/>
                                 </mat-form-field>
                               </div>
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Cidade" type="text" formControlName="Cidade" [(ngModel)]="empresa.Cidade" >
+                                  <input matInput placeholder="Cidade" type="text" #Cidade="ngModel" [(ngModel)]="empresaServico.empresaSelecionada.Cidade" name="Cidade" />
                                 </mat-form-field>
                               </div>
                           </div>
                           <div class="row">
                               <div class="col-md-8">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Endereço" type="text" formControlName="Endereco" [(ngModel)]="empresa.Endereco" >
+                                  <input matInput placeholder="Endereço" type="text" #Endereço="ngModel" [(ngModel)]="empresaServico.empresaSelecionada.Endereco" name="Endereco" />
                                 </mat-form-field>
                               </div>
                               <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Estado" type="text"  formControlName="Estado" [(ngModel)]="empresa.Estado" >
+                                  <input matInput placeholder="Estado" type="text" #Estado="ngModel" [(ngModel)]="empresaServico.empresaSelecionada.Estado" name="Estado" />
                                 </mat-form-field>
                               </div>
                           </div>
                           <div class="row">
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Telefone" type="text" formControlName="Telefone" [(ngModel)]="empresa.Telefone" >
+                                  <input matInput placeholder="Telefone" type="text" #Telefone="ngModel" [(ngModel)]="empresaServico.empresaSelecionada.Telefone"  name="Telefone"/>
                                 </mat-form-field>
                               </div>
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Celular" type="text" formControlName="Celular" [(ngModel)]="empresa.Celular" >
+                                  <input matInput placeholder="Celular" type="text" #Celular="ngModel" [(ngModel)]="empresaServico.empresaSelecionada.Celular" name="Celular" />
                                 </mat-form-field>
                               </div>
                           </div>
-                          <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="atualizarEmpresa()" [disabled]="!form.valid">Atualizar dados</button>
-                          <div class="clearfix"></div>
+                          
+                          <div class="form-group">
+                              <button class="btn btn-default" type="submit" [disabled]="!empresaForm.valid">
+                                <i class="fa fa-floppy-o"></i>
+                                 Atualizar dados</button>
+                              <button class="btn btn-default" type="button" (click)="resetForm(empresaForm)">
+                                <i class="fa fa-repeat"></i>
+                                 Limpar</button>
+                            </div>
                       </form>
                   </div>
               </div>

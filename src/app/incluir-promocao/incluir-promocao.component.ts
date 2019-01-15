@@ -38,7 +38,7 @@ export class IncluirPromocaoComponent implements OnInit {
       Categoria: ['Categoria']
     });
 
-    this.obterPromocao();
+    //this.obterPromocao();
     this.obterCategorias();
   }
 
@@ -65,39 +65,39 @@ export class IncluirPromocaoComponent implements OnInit {
     }
   }
 
-  atualizarPromocao(){
+  // atualizarPromocao(){
     
-    this.promocao.IdEmpresa = Number.parseInt(this.promocaoService.obterIdEmpresa());
-    this.promocao.IdCategoria = this.categoriaSelecionada.Id;
+  //   this.promocao.IdEmpresa = Number.parseInt(this.promocaoService.obterIdEmpresa());
+  //   this.promocao.IdCategoria = this.categoriaSelecionada.Id;
 
-    if(this.promocao !== null)
-    {
-      this.promocao
-      this.promocaoService
-        .atualizarPromocao(this.promocao)
-        .subscribe(resultado => {
-          if(resultado.Sucesso == true){
+  //   if(this.promocao !== null)
+  //   {
+  //     this.promocao
+  //     this.promocaoService
+  //       .atualizarPromocao(this.promocao)
+  //       .subscribe(resultado => {
+  //         if(resultado.Sucesso == true){
 
-            Swal('Sucesso', resultado.Mensagens[0], 'success');
-            this.router.navigate(['/promocoes-list']);
+  //           Swal('Sucesso', resultado.Mensagens[0], 'success');
+  //           this.router.navigate(['/promocoes-list']);
   
-          } else {
+  //         } else {
   
-            Swal('Falha', resultado.Mensagens[0], 'warning');
-          }
-        });
-    }
-  }
+  //           Swal('Falha', resultado.Mensagens[0], 'warning');
+  //         }
+  //       });
+  //   }
+  // }
 
-  obterPromocao(){
-    const id = Number.parseInt(this.rotaAtivada.snapshot.params['id']);
-    console.log(id);
-    if(id !== undefined && id > 0){
-      this.promocaoService
-        .obterPorId(id)
-        .subscribe(resposta => this.promocao = resposta);
-    }
-  }
+  // obterPromocao(){
+  //   const id = Number.parseInt(this.rotaAtivada.snapshot.params['id']);
+  //   console.log(id);
+  //   if(id !== undefined && id > 0){
+  //     this.promocaoService
+  //       .obterPorId(id)
+  //       .subscribe(resposta => this.promocao = resposta);
+  //   }
+  // }
 
   obterCategorias(){
     this.categoriaService

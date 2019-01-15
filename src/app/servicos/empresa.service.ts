@@ -1,34 +1,62 @@
-import { DadosQuantidadeGerencialModelo } from './../modelos/DadosQuantidadeGerencialModelo';
-import { ResultadoOperacao } from './../modelos/ResultadoOperacao';
-import { environment } from './../../environments/environment';
 import { EmpresaModelo } from './../modelos/EmpresaModelo';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class EmpresaService {
 
-  empresaModelo: EmpresaModelo;
-  urlAtualizar: string = `${environment.urlBase}Api/Empresa/Gravar`;
-  urlObterPorIdUsuario: string = `${environment.urlBase}Api/Empresa/ObterPorIdUsuario/`;
-  urlObterQtds: string = `${environment.urlBase}Api/Empresa/ObterQuantidadesGerencial/`;
 
-  constructor(private httpClient: HttpClient) { 
+  listaEmpresa: AngularFireList<any>;
+  empresaSelecionada: EmpresaModelo = new EmpresaModelo();
+  constructor(private firebase :AngularFireDatabase ) { }
 
+  getData(){
+    this.listaEmpresa = this.firebase.list('empresas');
+    return this.listaEmpresa;
   }
 
-  atualizarEmpresa (empresa: EmpresaModelo): Observable<ResultadoOperacao<EmpresaModelo>> {
-    return this.httpClient.post<ResultadoOperacao<EmpresaModelo>>(this.urlAtualizar, empresa)
+  inserirEmpresa(empresa : EmpresaModelo)
+  {
+    this.firebase.list('empresas').push({
+      Key: empresa.$Key,
+      RazaoSocial: empresa.RazaoSocial,
+      Cnpj: empresa.Cnpj,
+      Cep : empresa.Cep,
+      Site : empresa.Site,
+      Telefone : empresa.Telefone,
+      Celular : empresa.Celular,
+      Endereco : empresa.Endereco,
+      Estado : empresa.Estado,
+      Cidade : empresa.Cidade, 
+      DataCadastro: Date.now.toString(), 
+      DataAlteracao: null,
+      QuantidadeFavoritos: empresa.QuantidadeFavoritos,
+    }).then((result: any) => {
+      console.log(result.key);
+    });
   }
 
-  obterPorIdUsuario(id: Number){
-    return this.httpClient.get<EmpresaModelo>(`${this.urlObterPorIdUsuario}${id}`);
+  atualizarEmpresa(empresa : EmpresaModelo){
+    this.listaEmpresa.update(empresa.$Key,
+    {
+      Key: empresa.$Key,
+      RazaoSocial: empresa.RazaoSocial,
+      Cnpj: empresa.Cnpj,
+      Cep : empresa.Cep,
+      Site : empresa.Site,
+      Telefone : empresa.Telefone,
+      Celular : empresa.Celular,
+      Endereco : empresa.Endereco,
+      Estado : empresa.Estado,
+      Cidade : empresa.Cidade, 
+      DataAlteracao: Date.now.toString(),
+      QuantidadeFavoritos: empresa.QuantidadeFavoritos,
+    }).then((result: any) => {
+      console.log(result.key);
+    });
   }
 
-  obterQuantidadeGerencialEmpresa(id: number){
-    return this.httpClient.get<DadosQuantidadeGerencialModelo>(`${this.urlObterQtds}${id}`);
+  deletarEmpresa($key : string){
+    this.listaEmpresa.remove($key);
   }
-  
-
 }
