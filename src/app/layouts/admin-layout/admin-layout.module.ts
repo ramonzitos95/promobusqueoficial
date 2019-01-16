@@ -1,4 +1,3 @@
-import { IncluirPromocaoComponent } from './../../incluir-promocao/incluir-promocao.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -6,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
-import { PromocoesListComponent } from '../../table-list/pomocoes-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
@@ -28,6 +26,8 @@ import {
 } from '@angular/material';
 import { CategoriasListComponent } from '../../categoria/categorias-list/categorias-list.component';
 import { IncluirCategoriaComponent } from '../../categoria/incluir-categoria/incluir-categoria.component';
+import { IncluirPromocaoComponent } from 'app/promocoes/incluir-promocao/incluir-promocao.component';
+import { PromocoesListComponent } from 'app/promocoes/promocoes-list/pomocoes-list.component';
 @NgModule({
   imports: [
     CommonModule,

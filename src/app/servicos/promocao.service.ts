@@ -1,58 +1,76 @@
 import { PromocaoModelo } from './../modelos/PromocaoModelo';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { environment } from 'environments/environment';
-import { ResultadoOperacao } from '../modelos/ResultadoOperacao';
-import { Observable } from 'rxjs/Observable';
 
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database'
-import { getLocaleDateTimeFormat } from '@angular/common';
+import { DataHelperServico } from './datahelper.service';
 
 @Injectable()
 export class PromocaoService {
 
   listaPromocao: AngularFireList<any>;
-  constructor(private firebase :AngularFireDatabase ) {
+  promocaoSelecionada: PromocaoModelo = new PromocaoModelo();
+
+  constructor(private firebase :AngularFireDatabase, private dataHelper: DataHelperServico ) {
 
   }
 
-  getData(){
-    this.listaPromocao = this.firebase.list('employees');
-    return this.listaPromocao;
+  getListPromocoes(){
+    var ref = this.firebase.database.ref('promocoes');
+    var listaPromocoes = [];
+
+    ref.once("value")
+    .then(function(snapshot){
+      snapshot.forEach(function(childSnapshot) {
+        listaPromocoes.push({
+          $Key: childSnapshot.key,
+          Ativa: childSnapshot.child('Ativa').val(),
+          DataAlteracao: childSnapshot.child('DataAlteracao').val(),
+          DataCadastro: childSnapshot.child('DataCadastro').val(),
+          Descricao: childSnapshot.child('Descricao').val(),
+          DataValidade: childSnapshot.child('DataValidade').val(),
+          IdCategoria: childSnapshot.child('IdCategoria').val(),
+          IdEmpresa: childSnapshot.child('IdEmpresa').val(),
+          Nome: childSnapshot.child('Nome').val(),
+          QuantidadeVisitas: childSnapshot.child('QuantidadeVisitas').val()
+        })
+      })
+    })
+
+    return listaPromocoes;
   }
 
-  insertEmployee(promocao : PromocaoModelo)
+  inserirPromocao(promocao : PromocaoModelo)
   {
-    this.listaPromocao.push({
-      nome: promocao.Nome,
-      descricao: promocao.Descricao,
-      idCategoria: promocao.IdCategoria,
-      idEmpresa: promocao.IdEmpresa,
-      dataValidade: promocao.DataValidade,
-      dataCadastro: Date.now,
-      quantidadeVisitas: promocao.QuantidadeVisitas,
-      foto: promocao.Foto,
-      ativa: promocao.Ativa,
-      dataAlteracao: null
+    this.firebase.list('promocoes').push({
+      Nome: promocao.Nome,
+      Descricao: promocao.Descricao,
+      IdCategoria: promocao.IdCategoria,
+      IdEmpresa: promocao.IdEmpresa,
+      DataValidade: promocao.DataValidade,
+      DataCadastro: this.dataHelper.dataHoje(),
+      QuantidadeVisitas: promocao.QuantidadeVisitas,
+      DataAlteracao: null
+    }).then((result: any) => {
+      console.log(result.key);
     });
   }
 
-  updateEmployee(promocao : PromocaoModelo){
-    this.listaPromocao.update(promocao.$key,
+  atualizarPromocao(promocao : PromocaoModelo){
+    this.firebase.list('promocoes').update(promocao.$Key,
       {
-        nome: promocao.Nome,
-        descricao: promocao.Descricao,
-        idCategoria: promocao.IdCategoria,
-        idEmpresa: promocao.IdEmpresa,
-        dataValidade: promocao.DataValidade,
-        quantidadeVisitas: promocao.QuantidadeVisitas,
-        foto: promocao.Foto,
-        ativa: promocao.Ativa,
-        dataAlteracao: Date.now
+        Nome: promocao.Nome,
+        Descricao: promocao.Descricao,
+        IdCategoria: promocao.IdCategoria,
+        IdEmpresa: promocao.IdEmpresa,
+        DataValidade: promocao.DataValidade,
+        QuantidadeVisitas: promocao.QuantidadeVisitas,
+        DataAlteracao: this.dataHelper.dataHoje()
+      }).then((result: any) => {
+        console.log(result.key);
       });
   }
 
-  deleteEmployee($key : string){
+  deletarPromocao($key : string){
     this.listaPromocao.remove($key);
   }
 

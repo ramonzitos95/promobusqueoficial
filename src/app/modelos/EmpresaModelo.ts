@@ -9,7 +9,7 @@ export class EmpresaModelo {
     Endereco : string;
     Estado : string;
     Cidade : string; 
-    DataCadastro: Date; 
-    DataAlteracao: Date; 
+    DataCadastro: string; 
+    DataAlteracao: string; 
     QuantidadeFavoritos: Number;
 }

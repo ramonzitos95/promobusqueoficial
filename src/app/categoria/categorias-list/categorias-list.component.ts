@@ -15,38 +15,9 @@ export class CategoriasListComponent implements OnInit {
   constructor(
     private categoriaService: CategoriaService
   ) { 
-   this.carregaCategorias();
+   
   }
 
   ngOnInit() {
-  }
-
-  carregaCategorias(){
-    this.categoriaService
-    .obterTodasCategorias()
-    .subscribe(res => {
-      console.log(res);
-      this.categorias = res;
-    });
-  }
-
-  excluirCategoria(id: number){
-    if(id != undefined && id > 0){
-      this.categoriaService
-        .remover(id)
-        .subscribe(promocao => {
-
-          if(promocao !== null){
-            Swal('Exclusão', 'Categoria removida com sucesso', 'success');
-            this.carregaCategorias();
-          }
-          else{
-            Swal('Exclusão', 'Houve um problema ao excluir a categoria', 'info');
-          }
-
-        })
-    } else {
-      console.log('Id da categoria indefinido!');
-    }
   }
 }

@@ -34,7 +34,7 @@
                                         
                                   </th>
                               </thead>
-                              <tbody *ngFor="let p of promocoes">
+                              <tbody *ngFor="let p of promocoesList">
                                   <tr>
                                       <td>
                                           {{p.Id}}
@@ -50,7 +50,7 @@
                                       </td>
 
                                       <td>
-                                        {{p.QuantidadeVisitas}}
+                                          {{p.QuantidadeVisitas}}
                                       </td>
 
                                       <td></td>
@@ -58,7 +58,7 @@
                                             <button class="btn btn-danger" [routerLink]="['/incluir-promocoes', p.Id]" routerLinkActive="router-link-active">Alterar</button>
                                       </td>
                                       <td >
-                                            <button class="btn btn-danger" (click)="excluirPromocao(p.Id)">Excluir</button>
+                                            <button class="btn btn-danger" (click)="onDelete(p.$Key)">Excluir</button>
                                       </td>
                                   </tr>
                               </tbody>

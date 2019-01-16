@@ -26,6 +26,7 @@ import { LoginComponent } from './login/login.component';
 import { UsuarioComponent } from './login/usuario/usuario.component';
 import { environment } from '../environments/environment';
 import { AuthGuard } from './guards/auth.guard';
+import { DataHelperServico } from './servicos/datahelper.service';
 
 @NgModule({
   imports: [
@@ -48,7 +49,7 @@ import { AuthGuard } from './guards/auth.guard';
     LoginComponent,
     UsuarioComponent
   ],
-  providers: [EmpresaService, AuthService, AuthGuard, UsuarioService, PromocaoService, CategoriaService, ConsultacepService], 
+  providers: [EmpresaService, AuthService, AuthGuard, UsuarioService, PromocaoService, CategoriaService, ConsultacepService, DataHelperServico], 
   bootstrap: [AppComponent]
 })
 

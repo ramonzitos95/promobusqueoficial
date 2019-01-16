@@ -1,0 +1,63 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title">Incluir promocão</h4>
+                    <p class="card-category">Preencha os dados da promoção abaixo</p>
+                </div>
+                <div class="card-body">
+                    <form  #promocaoForm="ngForm" (ngSubmit)="onSubmit(promocaoForm)">
+                        <input type="hidden" name="$Key" #$Key="ngModel" [(ngModel)]="promocaoServico.promocaoSelecionada.$Key">
+                        <input type="hidden" name="IdCategoria" #IdCategoria="ngModel" [(ngModel)]="promocaoServico.promocaoSelecionada.IdCategoria">
+                        <input type="hidden" name="IdEmpresa" #IdEmpresa="ngModel" [(ngModel)]="promocaoServico.promocaoSelecionada.IdEmpresa">
+                        <input type="hidden" name="QuantidadeVisitas" #IdEmpresa="ngModel" [(ngModel)]="promocaoServico.promocaoSelecionada.QuantidadeVisitas">
+                        <div class="row">
+                            <div class="col-md-8">
+                              <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Nome" [(ngModel)]="promocaoServico.promocaoSelecionada.Nome" #Nome="ngModel" name="Nome">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-4">  
+                              <mat-form-field>
+                                <input matInput [matDatepicker]="picker" placeholder="title" placeholder="Data de validade" [(ngModel)]="promocaoServico.promocaoSelecionada.DataValidade" autocomplete="off" #DataValidade="ngModel" name="DataValidade">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Descricao" type="text" [(ngModel)]="promocaoServico.promocaoSelecionada.Descricao" #Descricao="ngModel" name="Descricao">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-4">
+                                <mat-form-field>
+                                    <mat-select placeholder="Categoria" [(ngModel)]="categoriaSelecionada" #Categoria="ngModel" name="Categoria">
+                                    <mat-option>Selecione</mat-option>
+                                    <mat-option *ngFor="let cat of categorias" [value]="cat" (click)="onChangeCategoria(cat)" >{{cat.Nome}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right button-salvar" (click)="atualizarPromocao()" [disabled]="!form.valid">Gravar</button>
+                        <div class="clearfix"></div> -->
+                        <div class="form-group">
+                            <button class="btn btn-default" type="submit" [disabled]="!promocaoForm.valid">
+                                <i class="fa fa-floppy-o"></i>
+                                Gravar</button>
+                            <button class="btn btn-default" type="button" (click)="resetForm(empresaForm)">
+                                <i class="fa fa-repeat"></i>
+                                Limpar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

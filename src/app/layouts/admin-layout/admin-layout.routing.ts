@@ -1,17 +1,17 @@
 import { IncluirCategoriaComponent } from './../../categoria/incluir-categoria/incluir-categoria.component';
 import { CategoriasListComponent } from './../../categoria/categorias-list/categorias-list.component';
-import { IncluirPromocaoComponent } from './../../incluir-promocao/incluir-promocao.component';
-import { AuthService } from './../../login/auth.service';
 import { Routes } from '@angular/router';
 
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
-import { PromocoesListComponent } from '../../table-list/pomocoes-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { IncluirPromocaoComponent } from 'app/promocoes/incluir-promocao/incluir-promocao.component';
+import { PromocoesListComponent } from 'app/promocoes/promocoes-list/pomocoes-list.component';
+import { AuthGuard } from 'app/guards/auth.guard';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -58,39 +58,47 @@ export const AdminLayoutRoutes: Routes = [
     // }
     {   
         path: 'dashboard',      
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
     },
     { 
         path: 'user-profile',   
-        component: UserProfileComponent
+        component: UserProfileComponent,
+        canActivate: [AuthGuard]
     },
     { 
         path: 'promocoes-list',     
-        component: PromocoesListComponent
+        component: PromocoesListComponent,
+        canActivate: [AuthGuard]
     },
     { 
         path: 'incluir-promocoes',     
-        component: IncluirPromocaoComponent
+        component: IncluirPromocaoComponent,
+        canActivate: [AuthGuard]
     },
     { 
         path: 'incluir-promocoes/:id',     
-        component: IncluirPromocaoComponent
+        component: IncluirPromocaoComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'categorias-list',
-        component: CategoriasListComponent
+        component: CategoriasListComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'incluir-categoria',
-        component: IncluirCategoriaComponent
+        component: IncluirCategoriaComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'incluir-categoria/:id',
-        component: IncluirCategoriaComponent
+        component: IncluirCategoriaComponent,
+        canActivate: [AuthGuard]
     },
     { 
         path: 'typography',     
-        component: TypographyComponent 
+        component: TypographyComponent,
     },
     { 
         path: 'icons',          

@@ -1,14 +1,13 @@
 export class PromocaoModelo {
-    $key : string;
-    Nome: String 
-    Descricao: String 
-    Ativa: Number;
-    Foto : Blob;
+    $Key : string;
+    Nome: string = '';
+    Descricao: string = '';
+    Ativa: number;
     DataValidade : Date;
-    DataCadastro : Date;
-    DataAlteracao: Date; 
-    IdEmpresa: number;
-    IdCategoria: number;
-    QuantidadeVisitas: number;
+    DataCadastro : string;
+    DataAlteracao: string; 
+    IdEmpresa: string = '';
+    IdCategoria: string = '';
+    QuantidadeVisitas: number = 0;
 }
 

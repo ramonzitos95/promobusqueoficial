@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSubmit(empresaForm: NgForm) {
-    console.log(empresaForm.value);
+    
     if (empresaForm.value.$Key == null)
       this.empresaServico.inserirEmpresa(empresaForm.value);
     else
@@ -49,15 +49,5 @@ export class UserProfileComponent implements OnInit {
       QuantidadeFavoritos: 0,
     }
   }
-
-  getcep(cep: String){
-    this.cepService
-      .consultarCep(cep)
-      .subscribe(resposta => {
-        console.log(resposta);
-      });
-  }
-
-  
 
 }

@@ -1,6 +1,7 @@
 import { EmpresaModelo } from './../modelos/EmpresaModelo';
 import { Injectable } from '@angular/core';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
+import { DataHelperServico } from './datahelper.service';
 
 @Injectable()
 export class EmpresaService {
@@ -8,7 +9,7 @@ export class EmpresaService {
 
   listaEmpresa: AngularFireList<any>;
   empresaSelecionada: EmpresaModelo = new EmpresaModelo();
-  constructor(private firebase :AngularFireDatabase ) { }
+  constructor(private firebase :AngularFireDatabase, private dataHelper: DataHelperServico ) { }
 
   getData(){
     this.listaEmpresa = this.firebase.list('empresas');
@@ -18,7 +19,6 @@ export class EmpresaService {
   inserirEmpresa(empresa : EmpresaModelo)
   {
     this.firebase.list('empresas').push({
-      Key: empresa.$Key,
       RazaoSocial: empresa.RazaoSocial,
       Cnpj: empresa.Cnpj,
       Cep : empresa.Cep,
@@ -28,7 +28,7 @@ export class EmpresaService {
       Endereco : empresa.Endereco,
       Estado : empresa.Estado,
       Cidade : empresa.Cidade, 
-      DataCadastro: Date.now.toString(), 
+      DataCadastro: this.dataHelper.dataHoje(), 
       DataAlteracao: null,
       QuantidadeFavoritos: empresa.QuantidadeFavoritos,
     }).then((result: any) => {
@@ -37,7 +37,7 @@ export class EmpresaService {
   }
 
   atualizarEmpresa(empresa : EmpresaModelo){
-    this.listaEmpresa.update(empresa.$Key,
+    this.firebase.list('empresas').update(empresa.$Key,
     {
       Key: empresa.$Key,
       RazaoSocial: empresa.RazaoSocial,
@@ -49,7 +49,7 @@ export class EmpresaService {
       Endereco : empresa.Endereco,
       Estado : empresa.Estado,
       Cidade : empresa.Cidade, 
-      DataAlteracao: Date.now.toString(),
+      DataAlteracao: this.dataHelper.dataHoje(),
       QuantidadeFavoritos: empresa.QuantidadeFavoritos,
     }).then((result: any) => {
       console.log(result.key);
